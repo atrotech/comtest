@@ -31,3 +31,10 @@ Usage: comtest [-d device] [-t tty] [-s speed] [-7] [-c] [-x] [-o] [-h]
          -h print this help
 ```
 
+
+friendlyarm NanoPi Fire2A Serial port wiki
+------------
+
+https://wiki.friendlyarm.com/wiki/index.php/Serial_port
+
+
