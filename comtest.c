@@ -8,6 +8,8 @@
 # include <errno.h>
 # include <string.h>
 
+
+
 static void Error(const char *Msg)
 {
     fprintf (stderr, "%s\n", Msg);
@@ -60,7 +62,7 @@ static inline void WaitFdWriteable(int Fd)
     if (select(Fd + 1, NULL, &WriteSetFD, NULL, NULL) < 0) {
 	  Error(strerror(errno));
     }
-	
+
 }
 
 int main(int argc, char **argv)
@@ -208,7 +210,7 @@ int main(int argc, char **argv)
                         goto ExitLabel;
                 } else
                     EscKeyCount = 0;
-	    } 
+	    }
         }
 
     }
