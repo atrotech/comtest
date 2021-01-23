@@ -78,7 +78,7 @@ int main(int argc, char **argv)
     int DeviceSpeed = B115200;
     int TtySpeed = B115200;
     int ByteBits = CS8;
-    const char *DeviceName = "/dev/ttyS0";
+    const char *DeviceName = "/dev/ttyAMA1";
     const char *TtyName = "/dev/tty";
     int OutputHex = 0;
     int OutputToStdout = 0;
