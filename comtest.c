@@ -40,7 +40,7 @@ static inline void WaitFdWriteable(int Fd)
     FD_ZERO(&WriteSetFD);
     FD_SET(Fd, &WriteSetFD);
     if (select(Fd + 1, NULL, &WriteSetFD, NULL, NULL) < 0) {
-	  printf(strerror(errno));
+	  fprintf(strerror(errno));
     }
 
 }
@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 	FD_SET( TtyFd, &ReadSetFD);
 #	define max(x,y) ( ((x) >= (y)) ? (x) : (y) )
 	if (select(max(CommFd, TtyFd) + 1, &ReadSetFD, NULL, NULL, NULL) < 0) {
-	    printf(strerror(errno));
+	    fprintf(strerror(errno));
 	}
 #	undef max
 
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
 
 		WaitFdWriteable(TtyFd);
 		if (write(TtyFd, &Char, 1) < 0) {
-	  	    printf(strerror(errno));
+	  	    fprintf(strerror(errno));
 		}
 		if (OutputToStdout) {
 		    if (UseColor)
@@ -131,7 +131,7 @@ int main(int argc, char **argv)
        		static int EscKeyCount = 0;
 		WaitFdWriteable(CommFd);
        		if (write(CommFd, &Char, 1) < 0) {
-	  	    printf(strerror(errno));
+	  	    fprintf(strerror(errno));
 		}
 		if (OutputToStdout) {
 		    if (UseColor)
