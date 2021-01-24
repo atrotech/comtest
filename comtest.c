@@ -113,7 +113,7 @@ int main(int argc, char **argv)
 
 		WaitFdWriteable(TtyFd);
 		if (write(TtyFd, &Char, 1) < 0) {
-	  	    Error(strerror(errno));
+	  	    printf(strerror(errno));
 		}
 		if (OutputToStdout) {
 		    if (UseColor)
@@ -131,7 +131,7 @@ int main(int argc, char **argv)
        		static int EscKeyCount = 0;
 		WaitFdWriteable(CommFd);
        		if (write(CommFd, &Char, 1) < 0) {
-	  	    Error(strerror(errno));
+	  	    printf(strerror(errno));
 		}
 		if (OutputToStdout) {
 		    if (UseColor)
