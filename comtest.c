@@ -40,7 +40,7 @@ static inline void WaitFdWriteable(int Fd)
     FD_ZERO(&WriteSetFD);
     FD_SET(Fd, &WriteSetFD);
     if (select(Fd + 1, NULL, &WriteSetFD, NULL, NULL) < 0) {
-	  Error(strerror(errno));
+	  printf(strerror(errno));
     }
 
 }
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
     int UseColor = 0;
    
     CommFd = open(DeviceName, O_RDWR, 0);
-    //if (CommFd < 0)Error("Unable to open device");
+    
     if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)
      	printf("Unable set to NONBLOCK mode");
 
