@@ -13,7 +13,7 @@ How to build
 Usage
 ------------
 ```
-./comtest -d /dev/ttyS4 -s 115200
+./comtest -d /dev/ttyAMA3 -s 38400
 ```
 
 Parameters
