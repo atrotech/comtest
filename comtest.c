@@ -66,10 +66,9 @@ int main(int argc, char **argv)
     int UseColor = 0;
    
     CommFd = open(DeviceName, O_RDWR, 0);
-    if (CommFd < 0)
-	Error("Unable to open device");
+    //if (CommFd < 0)Error("Unable to open device");
     if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)
-     	Error("Unable set to NONBLOCK mode");
+     	printf("Unable set to NONBLOCK mode");
 
 
     memset(&TtyAttr, 0, sizeof(struct termios));
@@ -78,18 +77,16 @@ int main(int argc, char **argv)
     TtyAttr.c_cc[VMIN] = 1;
 
     if (tcsetattr(CommFd, TCSANOW, &TtyAttr) < 0)
-        Warning("Unable to set comm port");
+        printf("Unable to set comm port");
 
     TtyFd = open(TtyName, O_RDWR | O_NDELAY, 0);
-    if (TtyFd < 0)
-	Error("Unable to open tty");
 
     TtyAttr.c_cflag = TtySpeed | HUPCL | ByteBits | CREAD | CLOCAL;
     if (tcgetattr(TtyFd, &BackupTtyAttr) < 0)
-	Error("Unable to get tty");
+	printf("Unable to get tty");
 
     if (tcsetattr(TtyFd, TCSANOW, &TtyAttr) < 0)
-	Error("Unable to set tty");
+	printf("Unable to set tty");
 
 
     for (;;) {
