@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 	FD_SET( TtyFd, &ReadSetFD);
 #	define max(x,y) ( ((x) >= (y)) ? (x) : (y) )
 	if (select(max(CommFd, TtyFd) + 1, &ReadSetFD, NULL, NULL, NULL) < 0) {
-	    Error(strerror(errno));
+	    printf(strerror(errno));
 	}
 #	undef max
 
