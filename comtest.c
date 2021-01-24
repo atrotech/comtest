@@ -27,7 +27,6 @@ static int SerialSpeed(const char *SpeedString)
     TestSpeed(57600);
     TestSpeed(115200);
     TestSpeed(230400);
-    Error("Bad speed");
     return -1;
 }
 
