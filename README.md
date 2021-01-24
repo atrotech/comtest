@@ -5,7 +5,7 @@ Serial port communication in C.
 How to build
 ------------
 ```
-# git clone https://github.com/friendlyarm/comtest.git
+# git clone https://github.com/atrotech/comtest.git
 # cd comtest
 # gcc -o comtest comtest.c
 ```
