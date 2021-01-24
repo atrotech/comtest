@@ -155,7 +155,7 @@ int main(int argc, char **argv)
 
 ExitLabel:
     if (tcsetattr(TtyFd, TCSANOW, &BackupTtyAttr) < 0)
-	Error("Unable to set tty");
+	printf("Unable to set tty");
 
     return 0;
 }
