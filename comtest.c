@@ -10,16 +10,8 @@
 
 
 
-static void Error(const char *Msg)
-{
-    fprintf (stderr, "%s\n", Msg);
-    fprintf (stderr, "strerror() is %s\n", strerror(errno));
-    exit(1);
-}
-static void Warning(const char *Msg)
-{
-     fprintf (stderr, "Warning: %s\n", Msg);
-}
+
+
 
 
 static int SerialSpeed(const char *SpeedString)
@@ -39,20 +31,9 @@ static int SerialSpeed(const char *SpeedString)
     return -1;
 }
 
-static void PrintUsage(void)
-{
 
-   fprintf(stderr, "comtest - interactive program of comm port\n");
-   fprintf(stderr, "press [ESC] 3 times to quit\n\n");
 
-   fprintf(stderr, "Usage: comtest [-d device] [-t tty] [-s speed] [-7] [-c] [-x] [-o] [-h]\n");
-   fprintf(stderr, "         -7 7 bit\n");
-   fprintf(stderr, "         -x hex mode\n");
-   fprintf(stderr, "         -o output to stdout too\n");
-   fprintf(stderr, "         -c stdout output use color\n");
-   fprintf(stderr, "         -h print this help\n");
-   exit(-1);
-}
+
 
 static inline void WaitFdWriteable(int Fd)
 {
@@ -75,62 +56,20 @@ int main(int argc, char **argv)
     struct termios TtyAttr;
     struct termios BackupTtyAttr;
 
-    int DeviceSpeed = B115200;
-    int TtySpeed = B115200;
+    int DeviceSpeed = B38400;
+    int TtySpeed = B38400;
     int ByteBits = CS8;
     const char *DeviceName = "/dev/ttyAMA3";
     const char *TtyName = "/dev/tty";
     int OutputHex = 0;
     int OutputToStdout = 0;
     int UseColor = 0;
-
-    opterr = 0;
-    for (;;) {
-        int c = getopt(argc, argv, "d:s:t:7xoch");
-        if (c == -1)
-            break;
-        switch(c) {
-        case 'd':
-            DeviceName = optarg;
-            break;
-        case 't':
-            TtyName = optarg;
-            break;
-        case 's':
-	    if (optarg[0] == 'd') {
-		DeviceSpeed = SerialSpeed(optarg + 1);
-	    } else if (optarg[0] == 't') {
-		TtySpeed = SerialSpeed(optarg + 1);
-	    } else
-            	TtySpeed = DeviceSpeed = SerialSpeed(optarg);
-            break;
-	case 'o':
-	    OutputToStdout = 1;
-	    break;
-	case '7':
-	    ByteBits = CS7;
-	    break;
-        case 'x':
-            OutputHex = 1;
-            break;
-	case 'c':
-	    UseColor = 1;
-	    break;
-        case '?':
-        case 'h':
-        default:
-	    PrintUsage();
-        }
-    }
-    if (optind != argc)
-        PrintUsage();
-
+   
     CommFd = open(DeviceName, O_RDWR, 0);
     if (CommFd < 0)
 	Error("Unable to open device");
     if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)
      	Error("Unable set to NONBLOCK mode");
-
 
 
     memset(&TtyAttr, 0, sizeof(struct termios));
