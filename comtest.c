@@ -117,9 +117,9 @@ int main(int argc, char **argv)
 		    OutputStdChar(stdout);
 		    if (UseColor)
 			fwrite("\x1b[00m", 1, 8, stdout);
-      printf("hey char: %c ", Char);
 		    fflush(stdout);
 		}
+    printf("hey char: %c ", Char);
 	    }
 	}
 
