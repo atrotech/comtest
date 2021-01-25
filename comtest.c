@@ -149,9 +149,7 @@ int main(int argc, char **argv)
 	    }
         }
 
-        char text;
-        sprintf(text,"%c%c",text,Char);
-        if (Char == 'M')printf("%s", text);
+        printf("heeeey:%c", Char);
     }
 
 ExitLabel:
