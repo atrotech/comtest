@@ -103,20 +103,21 @@ int main(int argc, char **argv)
 #	undef max
 
 	if (FD_ISSET(CommFd, &ReadSetFD)) {
-	    while (read(CommFd, &Char, 1) == 1) {
-
-		WaitFdWriteable(TtyFd);
-		if (write(TtyFd, &Char, 1) < 0) {
-	  	    printf("%s",strerror(errno));
-		}
-		if (OutputToStdout) {
-		    if (UseColor)
-			fwrite("\x1b[01;34m", 1, 8, stdout);
-		    OutputStdChar(stdout);
-		    if (UseColor)
-			fwrite("\x1b[00m", 1, 8, stdout);
-		    fflush(stdout);
-		}
+	    while (read(CommFd, &Char, 1) == 1)
+      {
+      		WaitFdWriteable(TtyFd);
+      		if (write(TtyFd, &Char, 1) < 0) {
+      	  	    printf("%s",strerror(errno));
+      		}
+      		if (OutputToStdout) {
+      		    if (UseColor)
+      			fwrite("\x1b[01;34m", 1, 8, stdout);
+      		    OutputStdChar(stdout);
+              printf("-output----");
+      		    if (UseColor)
+      			fwrite("\x1b[00m", 1, 8, stdout);
+      		    fflush(stdout);
+      		}
 	    }
 	}
 
