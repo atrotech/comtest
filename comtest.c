@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 
     if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)printf("Unable set to NONBLOCK mode");
 
-    if (tcsetattr(CommFd, TCSANOW, &TtyAttr) < 0)printf("Unable to set comm port");
+    //if (tcsetattr(CommFd, TCSANOW, &TtyAttr) < 0)printf("Unable to set comm port");
 
 
 
