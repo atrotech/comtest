@@ -10,6 +10,7 @@
 
 
 //-------------------------------------------------------------------------
+#define max(x,y) ( ((x) >= (y)) ? (x) : (y) )
 
 static int SerialSpeed(const char *SpeedString)
 {
@@ -43,48 +44,25 @@ static inline void WaitFdWriteable(int Fd)
 
 int main(int argc, char **argv)
 {
-    int CommFd, TtyFd;
-
-    struct termios TtyAttr;
-    struct termios BackupTtyAttr;
+    int CommFd;
 
     int DeviceSpeed = B38400;
-    int TtySpeed = B38400;
     int ByteBits = CS8;
     const char *DeviceName = "/dev/ttyAMA3";
-    const char *TtyName = "/dev/tty";
-    int OutputHex = 0;
-    int OutputToStdout = 0;
-    int UseColor = 0;
+
 
     CommFd = open(DeviceName, O_RDWR, 0);
 
-    if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)
-     	printf("Unable set to NONBLOCK mode");
+    if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)printf("Unable set to NONBLOCK mode");
 
+    if (tcsetattr(CommFd, TCSANOW, &TtyAttr) < 0)printf("Unable to set comm port");
 
-    memset(&TtyAttr, 0, sizeof(struct termios));
-    TtyAttr.c_iflag = IGNPAR;
-    TtyAttr.c_cflag = DeviceSpeed | HUPCL | ByteBits | CREAD | CLOCAL;
-    TtyAttr.c_cc[VMIN] = 1;
-
-    if (tcsetattr(CommFd, TCSANOW, &TtyAttr) < 0)
-        printf("Unable to set comm port");
-
-    TtyFd = open(TtyName, O_RDWR | O_NDELAY, 0);
-
-    TtyAttr.c_cflag = TtySpeed | HUPCL | ByteBits | CREAD | CLOCAL;
-    if (tcgetattr(TtyFd, &BackupTtyAttr) < 0)
-	printf("Unable to get tty");
-
-    if (tcsetattr(TtyFd, TCSANOW, &TtyAttr) < 0)
-	printf("Unable to set tty");
 
 
 //-------------------------
 
 
-    for (;;) {
+for (;;) {
 	unsigned char Char = 0;
 	fd_set ReadSetFD;
 
@@ -92,44 +70,21 @@ int main(int argc, char **argv)
 	FD_ZERO(&ReadSetFD);
 
 	FD_SET(CommFd, &ReadSetFD);
-	FD_SET( TtyFd, &ReadSetFD);
-#	define max(x,y) ( ((x) >= (y)) ? (x) : (y) )
-	if (select(max(CommFd, TtyFd) + 1, &ReadSetFD, NULL, NULL, NULL) < 0) {
-	    printf("%s",strerror(errno));
-	}
-#	undef max
+
+	if (select(CommFd + 1, &ReadSetFD, NULL, NULL, NULL) < 0) {printf("%s",strerror(errno));}
 
 	if (FD_ISSET(CommFd, &ReadSetFD)) {
-	    while (read(CommFd, &Char, 1) == 1) {
-    		WaitFdWriteable(TtyFd);
-    		if (write(TtyFd, &Char, 1) < 0){printf("%s",strerror(errno));}
-	    }
-	}
+	    while (read(CommFd, &Char, 1) == 1)
+      {
+        printf("%c\n",Char);
+        WaitFdWriteable(CommFd);
+        if (write(CommFd, &Char, 1) < 0) {printf("%s",strerror(errno));}
+      }
+	   }
 
-
-	if (FD_ISSET(TtyFd, &ReadSetFD)) {
-	    while (read(TtyFd, &Char, 1) == 1) {
-       		  static int EscKeyCount = 0;
-		        WaitFdWriteable(CommFd);
-       		if (write(CommFd, &Char, 1) < 0) {printf("%s",strerror(errno));}
-
-
-
-      		if (Char == '\x1b') {
-                    EscKeyCount ++;
-                    if (EscKeyCount >= 3)
-                        goto ExitLabel;
-                } else
-                    EscKeyCount = 0;
-	    }
-        }
 
 
     }
 
-ExitLabel:
-    if (tcsetattr(TtyFd, TCSANOW, &BackupTtyAttr) < 0)
-	printf("Unable to set tty");
 
-    return 0;
 }
