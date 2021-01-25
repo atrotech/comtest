@@ -88,11 +88,6 @@ int main(int argc, char **argv)
 	unsigned char Char = 0;
 	fd_set ReadSetFD;
 
-	void OutputStdChar(FILE *File) {
-	    char Buffer[10];
-	    int Len = sprintf(Buffer, OutputHex ? "%.2X  " : "%c", Char);
-	    fwrite(Buffer, 1, Len, File);
-	}
 
 	FD_ZERO(&ReadSetFD);
 
