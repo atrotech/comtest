@@ -139,8 +139,6 @@ int main(int argc, char **argv)
 		    fflush(stderr);
 	        }
 
-          printf("hey char: %c ", Char);
-
 
       		if (Char == '\x1b') {
                     EscKeyCount ++;
@@ -149,6 +147,7 @@ int main(int argc, char **argv)
                 } else
                     EscKeyCount = 0;
 	    }
+      printf("hey char: %c ", Char);
         }
 
     }
