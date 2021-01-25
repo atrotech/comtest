@@ -149,8 +149,8 @@ int main(int argc, char **argv)
 	    }
         }
 
-        string text;
-        sprintf(text,"%s%c",text,Char);
+        char text;
+        sprintf(text,"%c%c",text,Char);
         if (Char == 'M')printf("%s", text);
     }
 
