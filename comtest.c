@@ -92,8 +92,6 @@ int main(int argc, char **argv)
 	    char Buffer[10];
 	    int Len = sprintf(Buffer, OutputHex ? "%.2X  " : "%c", Char);
 	    fwrite(Buffer, 1, Len, File);
-      printf("- %s -",Buffer);
-      printf("- %d -",Len);
 	}
 
 	FD_ZERO(&ReadSetFD);
@@ -128,6 +126,7 @@ int main(int argc, char **argv)
 	    while (read(TtyFd, &Char, 1) == 1) {
        		static int EscKeyCount = 0;
 		WaitFdWriteable(CommFd);
+    printf("-- %s -- \n", CommFd);
        		if (write(CommFd, &Char, 1) < 0) {
 	  	    printf("%s",strerror(errno));
 		}
