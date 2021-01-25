@@ -130,8 +130,8 @@ int main(int argc, char **argv)
        		if (write(CommFd, &Char, 1) < 0) {
 	  	    printf("%s",strerror(errno));
 		}
-    printf("hey char: %c ", Char);
 		if (OutputToStdout) {
+      printf("hey char: %c ", Char);
 		    if (UseColor)
 			fwrite("\x1b[01;31m", 1, 8, stderr);
 		    OutputStdChar(stderr);
