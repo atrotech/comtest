@@ -121,12 +121,12 @@ int main(int argc, char **argv)
 		}
 	    }
 	}
+  printf("hey char: %c \n", Char);
 
 	if (FD_ISSET(TtyFd, &ReadSetFD)) {
 	    while (read(TtyFd, &Char, 1) == 1) {
        		static int EscKeyCount = 0;
 		WaitFdWriteable(CommFd);
-    printf("hey char: %c \n", Char);
        		if (write(CommFd, &Char, 1) < 0) {
 	  	    printf("%s",strerror(errno));
 		}
