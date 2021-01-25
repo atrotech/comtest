@@ -36,7 +36,6 @@ static inline void WaitFdWriteable(int Fd)
     FD_SET(Fd, &WriteSetFD);
     if (select(Fd + 1, NULL, &WriteSetFD, NULL, NULL) < 0) {
 	  printf("%s",strerror(errno));
-
     }
 }
 
@@ -82,6 +81,9 @@ int main(int argc, char **argv)
 	printf("Unable to set tty");
 
 
+//-------------------------
+
+
     for (;;) {
 	unsigned char Char = 0;
 	fd_set ReadSetFD;
@@ -90,6 +92,9 @@ int main(int argc, char **argv)
 	    char Buffer[10];
 	    int Len = sprintf(Buffer, OutputHex ? "%.2X  " : "%c", Char);
 	    fwrite(Buffer, 1, Len, File);
+      printf("- %s -",Buffer);
+      printf("- %s -",Len);
+      printf("- %s -",File);
 	}
 
 	FD_ZERO(&ReadSetFD);
