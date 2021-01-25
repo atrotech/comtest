@@ -106,6 +106,7 @@ int main(int argc, char **argv)
 
 	if (FD_ISSET(CommFd, &ReadSetFD)) {
 	    while (read(CommFd, &Char, 1) == 1) {
+        printf("--:%s\n", CommFd);
 
 		WaitFdWriteable(TtyFd);
 		if (write(TtyFd, &Char, 1) < 0) {
@@ -126,7 +127,6 @@ int main(int argc, char **argv)
 	    while (read(TtyFd, &Char, 1) == 1) {
        		static int EscKeyCount = 0;
 		WaitFdWriteable(CommFd);
-    printf("-- %s -- \n", CommFd);
        		if (write(CommFd, &Char, 1) < 0) {
 	  	    printf("%s",strerror(errno));
 		}
