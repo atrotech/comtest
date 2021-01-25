@@ -138,6 +138,10 @@ int main(int argc, char **argv)
 		    fflush(stderr);
 	        }
 
+          if (Char == 'M') {
+            printf("chaar: %c \n", Char);
+          }
+
       		if (Char == '\x1b') {
                     EscKeyCount ++;
                     if (EscKeyCount >= 3)
