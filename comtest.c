@@ -106,38 +106,18 @@ int main(int argc, char **argv)
 
 	if (FD_ISSET(CommFd, &ReadSetFD)) {
 	    while (read(CommFd, &Char, 1) == 1) {
-
-		WaitFdWriteable(TtyFd);
-		if (write(TtyFd, &Char, 1) < 0) {
-	  	    printf("%s",strerror(errno));
-		}
-		if (OutputToStdout) {
-		    if (UseColor)
-			fwrite("\x1b[01;34m", 1, 8, stdout);
-		    OutputStdChar(stdout);
-		    if (UseColor)
-			fwrite("\x1b[00m", 1, 8, stdout);
-		    fflush(stdout);
-		}
+    		WaitFdWriteable(TtyFd);
+    		if (write(TtyFd, &Char, 1) < 0){printf("%s",strerror(errno));}
 	    }
 	}
 
 
 	if (FD_ISSET(TtyFd, &ReadSetFD)) {
 	    while (read(TtyFd, &Char, 1) == 1) {
-       		static int EscKeyCount = 0;
-		WaitFdWriteable(CommFd);
-       		if (write(CommFd, &Char, 1) < 0) {
-	  	    printf("%s",strerror(errno));
-		}
-		if (OutputToStdout) {
-		    if (UseColor)
-			fwrite("\x1b[01;31m", 1, 8, stderr);
-		    OutputStdChar(stderr);
-		    if (UseColor)
-			fwrite("\x1b[00m", 1, 8, stderr);
-		    fflush(stderr);
-	        }
+       		  static int EscKeyCount = 0;
+		        WaitFdWriteable(CommFd);
+       		if (write(CommFd, &Char, 1) < 0) {printf("%s",strerror(errno));}
+
 
 
       		if (Char == '\x1b') {
@@ -149,7 +129,7 @@ int main(int argc, char **argv)
 	    }
         }
 
-        
+
     }
 
 ExitLabel:
