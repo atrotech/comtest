@@ -106,6 +106,7 @@ int main(int argc, char **argv)
 
 	if (FD_ISSET(CommFd, &ReadSetFD)) {
 	    while (read(CommFd, &Char, 1) == 1) {
+          printf("hey char: %c ", Char);
 
 		WaitFdWriteable(TtyFd);
 		if (write(TtyFd, &Char, 1) < 0) {
@@ -121,7 +122,7 @@ int main(int argc, char **argv)
 		}
 	    }
 	}
-  printf("(%c)", Char);
+
 
 	if (FD_ISSET(TtyFd, &ReadSetFD)) {
 	    while (read(TtyFd, &Char, 1) == 1) {
