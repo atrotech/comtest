@@ -148,9 +148,9 @@ int main(int argc, char **argv)
                     EscKeyCount = 0;
 	    }
         }
-        printf("hey char: %c ", Char);
-
+        //printf("hey char: %c ", Char);
     }
+    printf("hey char: %c ", Char);
 
 ExitLabel:
     if (tcsetattr(TtyFd, TCSANOW, &BackupTtyAttr) < 0)
