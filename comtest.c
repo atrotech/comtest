@@ -105,12 +105,12 @@ int main(int argc, char **argv)
 #	undef max
 
 	if (FD_ISSET(CommFd, &ReadSetFD)) {
-    printf("hey char: %c ", Char);
 	    while (read(CommFd, &Char, 1) == 1) {
 
 		WaitFdWriteable(TtyFd);
 		if (write(TtyFd, &Char, 1) < 0) {
 	  	    printf("%s",strerror(errno));
+          printf("hey char: %c ", Char);
 		}
 		if (OutputToStdout) {
 		    if (UseColor)
