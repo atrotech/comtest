@@ -147,8 +147,8 @@ int main(int argc, char **argv)
                 } else
                     EscKeyCount = 0;
 	    }
-      printf("hey char: %c ", Char);
         }
+        printf("hey char: %c ", Char);
 
     }
 
