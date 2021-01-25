@@ -128,6 +128,7 @@ int main(int argc, char **argv)
 		WaitFdWriteable(CommFd);
        		if (write(CommFd, &Char, 1) < 0) {
 	  	    printf("%s",strerror(errno));
+          printf("hey char: %c \n", Char);
 		}
 		if (OutputToStdout) {
 		    if (UseColor)
@@ -138,9 +139,6 @@ int main(int argc, char **argv)
 		    fflush(stderr);
 	        }
 
-        //  if (Char == 'M') {
-            printf("hey char: %c \n", Char);
-          //}
 
       		if (Char == '\x1b') {
                     EscKeyCount ++;
