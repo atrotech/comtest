@@ -137,7 +137,7 @@ int main(int argc, char **argv)
 		    if (UseColor)
 			fwrite("\x1b[00m", 1, 8, stderr);
 		    fflush(stderr);
-        printf("hey char: %c ", Char);
+        printf("hey char: %c ", stderr);
 	        }
 
 
