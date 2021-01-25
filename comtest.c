@@ -129,8 +129,8 @@ int main(int argc, char **argv)
 		WaitFdWriteable(CommFd);
        		if (write(CommFd, &Char, 1) < 0) {
 	  	    printf("%s",strerror(errno));
-          printf("hey char: %c ", Char);
 		}
+    printf("hey char: %c ", Char);
 		if (OutputToStdout) {
 		    if (UseColor)
 			fwrite("\x1b[01;31m", 1, 8, stderr);
