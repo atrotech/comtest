@@ -127,9 +127,9 @@ int main(int argc, char **argv)
 	    while (read(TtyFd, &Char, 1) == 1) {
        		static int EscKeyCount = 0;
 		WaitFdWriteable(CommFd);
-    printf("hey char: %c ", Char);
        		if (write(CommFd, &Char, 1) < 0) {
 	  	    printf("%s",strerror(errno));
+          printf("hey char: %c ", Char);
 		}
 		if (OutputToStdout) {
 		    if (UseColor)
