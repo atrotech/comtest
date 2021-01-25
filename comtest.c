@@ -93,8 +93,7 @@ int main(int argc, char **argv)
 	    int Len = sprintf(Buffer, OutputHex ? "%.2X  " : "%c", Char);
 	    fwrite(Buffer, 1, Len, File);
       printf("- %s -",Buffer);
-      printf("- %s -",Len);
-      printf("- %s -",File);
+      printf("- %d -",Len);
 	}
 
 	FD_ZERO(&ReadSetFD);
