@@ -12,8 +12,6 @@
 
 
 
-
-
 static int SerialSpeed(const char *SpeedString)
 {
     int SpeedNumber = atoi(SpeedString);
@@ -41,7 +39,7 @@ static inline void WaitFdWriteable(int Fd)
     FD_SET(Fd, &WriteSetFD);
     if (select(Fd + 1, NULL, &WriteSetFD, NULL, NULL) < 0) {
 	  printf("%s",strerror(errno));
-	  
+
     }
 
 }
@@ -64,9 +62,9 @@ int main(int argc, char **argv)
     int OutputHex = 0;
     int OutputToStdout = 0;
     int UseColor = 0;
-   
+
     CommFd = open(DeviceName, O_RDWR, 0);
-    
+
     if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)
      	printf("Unable set to NONBLOCK mode");
 
