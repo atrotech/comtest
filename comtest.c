@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 		}
 	    }
 	}
-  printf("hey char: %c \n", Char);
+  printf("(%c)", Char);
 
 	if (FD_ISSET(TtyFd, &ReadSetFD)) {
 	    while (read(TtyFd, &Char, 1) == 1) {
