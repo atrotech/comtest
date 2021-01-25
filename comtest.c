@@ -93,7 +93,6 @@ int main(int argc, char **argv)
 	    int Len = sprintf(Buffer, OutputHex ? "%.2X  " : "%c", Char);
 	    fwrite(Buffer, 1, Len, File);
 	}
-  printf("hey char: %c ", Char);
 
 	FD_ZERO(&ReadSetFD);
 
@@ -106,6 +105,7 @@ int main(int argc, char **argv)
 #	undef max
 
 	if (FD_ISSET(CommFd, &ReadSetFD)) {
+    printf("hey char: %c ", Char);
 	    while (read(CommFd, &Char, 1) == 1) {
 
 		WaitFdWriteable(TtyFd);
