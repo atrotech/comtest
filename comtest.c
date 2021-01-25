@@ -113,7 +113,6 @@ int main(int argc, char **argv)
       		    if (UseColor)
       			fwrite("\x1b[01;34m", 1, 8, stdout);
       		    OutputStdChar(stdout);
-              printf("-output----");
       		    if (UseColor)
       			fwrite("\x1b[00m", 1, 8, stdout);
       		    fflush(stdout);
