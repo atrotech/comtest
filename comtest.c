@@ -106,7 +106,6 @@ int main(int argc, char **argv)
 
 	if (FD_ISSET(CommFd, &ReadSetFD)) {
 	    while (read(CommFd, &Char, 1) == 1) {
-        printf("--:%d\n", CommFd);
 
 		WaitFdWriteable(TtyFd);
 		if (write(TtyFd, &Char, 1) < 0) {
