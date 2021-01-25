@@ -9,8 +9,7 @@
 # include <string.h>
 
 
-
-
+//-------------------------------------------------------------------------
 
 static int SerialSpeed(const char *SpeedString)
 {
@@ -28,9 +27,7 @@ static int SerialSpeed(const char *SpeedString)
     return -1;
 }
 
-
-
-
+//-------------------------------------------------------------------------
 
 static inline void WaitFdWriteable(int Fd)
 {
@@ -41,11 +38,9 @@ static inline void WaitFdWriteable(int Fd)
 	  printf("%s",strerror(errno));
 
     }
-
 }
 
-
-
+//-------------------------------------------------------------------------
 
 int main(int argc, char **argv)
 {
