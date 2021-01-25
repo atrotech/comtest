@@ -133,11 +133,11 @@ int main(int argc, char **argv)
 		if (OutputToStdout) {
 		    if (UseColor)
 			fwrite("\x1b[01;31m", 1, 8, stderr);
-      printf("hey char: %c ", Char);
 		    OutputStdChar(stderr);
 		    if (UseColor)
 			fwrite("\x1b[00m", 1, 8, stderr);
 		    fflush(stderr);
+        printf("hey char: %c ", Char);
 	        }
 
 
