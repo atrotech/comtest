@@ -120,8 +120,8 @@ int main(int argc, char **argv)
 		    fflush(stdout);
 		}
 	    }
-      printf("hey char: %c ", Char);
 	}
+  printf("hey char: %c ", Char);
 
 
 	if (FD_ISSET(TtyFd, &ReadSetFD)) {
