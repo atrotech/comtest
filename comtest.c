@@ -124,8 +124,8 @@ int main(int argc, char **argv)
 
 
 	if (FD_ISSET(TtyFd, &ReadSetFD)) {
-    printf("hey char: %c ", Char);
 	    while (read(TtyFd, &Char, 1) == 1) {
+         printf("hey char: %c ", Char);
        		static int EscKeyCount = 0;
 		WaitFdWriteable(CommFd);
        		if (write(CommFd, &Char, 1) < 0) {
