@@ -47,17 +47,12 @@ int main(int argc, char **argv)
     int CommFd;
 
     int DeviceSpeed = B38400;
-    int ByteBits = CS8;
     const char *DeviceName = "/dev/ttyAMA3";
 
 
     CommFd = open(DeviceName, O_RDWR, 0);
 
     if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)printf("Unable set to NONBLOCK mode");
-
-    //if (tcsetattr(CommFd, TCSANOW, &TtyAttr) < 0)printf("Unable to set comm port");
-
-
 
 //-------------------------
 
