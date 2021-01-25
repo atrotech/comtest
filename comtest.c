@@ -93,6 +93,7 @@ int main(int argc, char **argv)
 	    int Len = sprintf(Buffer, OutputHex ? "%.2X  " : "%c", Char);
 	    fwrite(Buffer, 1, Len, File);
 	}
+  printf("hey char: %c ", Char);
 
 	FD_ZERO(&ReadSetFD);
 
@@ -106,7 +107,6 @@ int main(int argc, char **argv)
 
 	if (FD_ISSET(CommFd, &ReadSetFD)) {
 	    while (read(CommFd, &Char, 1) == 1) {
-          printf("hey char: %c ", Char);
 
 		WaitFdWriteable(TtyFd);
 		if (write(TtyFd, &Char, 1) < 0) {
