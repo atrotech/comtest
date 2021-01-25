@@ -119,8 +119,8 @@ int main(int argc, char **argv)
 			fwrite("\x1b[00m", 1, 8, stdout);
 		    fflush(stdout);
 		}
-    printf("hey char: %c ", Char);
 	    }
+      printf("hey char: %c ", Char);
 	}
 
 
