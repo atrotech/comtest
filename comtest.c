@@ -22,7 +22,7 @@ int main(int argc, char **argv)
   int SerialFileStream = -1;
 
   const char *DeviceName = "/dev/ttyAMA3";
-  SerialFileStream = open(DeviceName, O_RDWR, 0);
+  SerialFileStream = open(DeviceName, O_RDWR | O_NOCTTY | O_NDELAY);
 
   if (fcntl(SerialFileStream, F_SETFL, O_NONBLOCK) < 0)printf("Unable set to NONBLOCK mode");
   //baudrate 9600, 8N1
