@@ -2,6 +2,10 @@
 
 NanoPi Fire 2A Serial port communication in C.  
 
+<br><hr>
+and you can use this link:
+https://github.com/atrotech/QtE-Demo/blob/main/SerialPort.cpp
+
 How to build
 ------------
 ```
