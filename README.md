@@ -1,6 +1,6 @@
 ## **comtest**
 
-Serial port communication in C.  
+NanoPi Fire 2A Serial port communication in C.  
 
 How to build
 ------------
