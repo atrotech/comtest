@@ -12,14 +12,14 @@ static inline void WaitFdWriteable(int Fd)
     FD_ZERO(&WriteSetFD);
     FD_SET(Fd, &WriteSetFD);
     if (select(Fd + 1, NULL, &WriteSetFD, NULL, NULL) < 0) {
-	  printf("%s",strerror(errno));
+	  printf("%d",errno);
     }
 }
 
 
 int main(int argc, char **argv)
 {
-  int CommFd;
+  int SerialFileStream = -1;
 
   const char *DeviceName = "/dev/ttyAMA3";
   SerialFileStream = open(DeviceName, O_RDWR, 0);
