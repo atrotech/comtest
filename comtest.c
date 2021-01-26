@@ -4,9 +4,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# include <time.h>
-
-
 
 
 static inline void WaitFdWriteable(int Fd)
@@ -23,22 +20,22 @@ static inline void WaitFdWriteable(int Fd)
 int main(int argc, char **argv)
 {
   int CommFd;
-  struct termios port_settings;
 
   const char *DeviceName = "/dev/ttyAMA3";
   CommFd = open(DeviceName, O_RDWR, 0);
+
   if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)printf("Unable set to NONBLOCK mode");
   //baudrate 9600, 8N1
-  cfsetispeed(&port_settings, B115200);
-  cfsetospeed(&port_settings, B115200);
+  
 
-  port_settings.c_cflag &= ~PARENB;   //Set no parity
-  port_settings.c_cflag &= ~CSTOPB;   //Set 1 stop bit
-  port_settings.c_cflag &= ~CSIZE;    //Set 8 bit data using mask bit
-  port_settings.c_cflag |= CS8;
-  port_settings.c_cflag &= ~CRTSCTS;  //No hadware hanshaking
-
-  tcsetattr(CommFd, TCSANOW, &port_settings); // apply the settings to the port
+  struct termios options;
+	tcgetattr(uart0_filestream, &options);
+	options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;		//<Set baud rate
+	options.c_iflag = IGNPAR;
+	options.c_oflag = 0;
+	options.c_lflag = 0;
+	tcflush(uart0_filestream, TCIFLUSH);
+	tcsetattr(uart0_filestream, TCSANOW, &options);
  
 
   for (;;)
