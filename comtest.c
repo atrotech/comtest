@@ -45,7 +45,7 @@ int main(int argc, char **argv)
   port_settings.c_cflag &= ~CRTSCTS;  //No hadware hanshaking
 
   tcsetattr(CommFd, TCSANOW, &port_settings); // apply the settings to the port
-  printf("%d \n",cfgetospeed());
+ 
 
   for (;;)
   {
