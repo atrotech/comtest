@@ -45,14 +45,14 @@ int main(int argc, char **argv)
 
   	FD_ZERO(&ReadSetFD);
   	FD_SET(CommFd, &ReadSetFD);
-  	if (select(CommFd + 1, &ReadSetFD, NULL, NULL, NULL) < 0){printf("%s",strerror(errno));}
+  	if (select(CommFd + 1, &ReadSetFD, NULL, NULL, NULL) < 0){}
   	if (FD_ISSET(CommFd, &ReadSetFD))
     {
       while (read(CommFd, &Char, 1) == 1)
       {
         printf("%c\n",Char);
         WaitFdWriteable(CommFd);
-        if (write(CommFd, &Char, 1) < 0){printf("%s",strerror(errno));}
+        if (write(CommFd, &Char, 1) < 0){}
       }
   	 }
    }
