@@ -11,6 +11,25 @@
 
 
 
+
+static int SerialSpeed(const char *SpeedString)
+{
+    int SpeedNumber = atoi(SpeedString);
+#   define TestSpeed(Speed) if (SpeedNumber == Speed) return B##Speed
+    TestSpeed(1200);
+    TestSpeed(2400);
+    TestSpeed(4800);
+    TestSpeed(9600);
+    TestSpeed(19200);
+    TestSpeed(38400);
+    TestSpeed(57600);
+    TestSpeed(115200);
+    TestSpeed(230400);
+    return -1;
+}
+
+
+
 static inline void WaitFdWriteable(int Fd)
 {
     fd_set WriteSetFD;
