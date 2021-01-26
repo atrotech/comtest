@@ -24,7 +24,7 @@ int main(int argc, char **argv)
   const char *DeviceName = "/dev/ttyAMA3";
   SerialFileStream = open(DeviceName, O_RDWR, 0);
 
-  if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)printf("Unable set to NONBLOCK mode");
+  if (fcntl(SerialFileStream, F_SETFL, O_NONBLOCK) < 0)printf("Unable set to NONBLOCK mode");
   //baudrate 9600, 8N1
   
 
@@ -44,15 +44,15 @@ int main(int argc, char **argv)
   	fd_set ReadSetFD;
 
   	FD_ZERO(&ReadSetFD);
-  	FD_SET(CommFd, &ReadSetFD);
-  	if (select(CommFd + 1, &ReadSetFD, NULL, NULL, NULL) < 0){}
-  	if (FD_ISSET(CommFd, &ReadSetFD))
+  	FD_SET(SerialFileStream, &ReadSetFD);
+  	if (select(SerialFileStream + 1, &ReadSetFD, NULL, NULL, NULL) < 0){}
+  	if (FD_ISSET(SerialFileStream, &ReadSetFD))
     {
-      while (read(CommFd, &Char, 1) == 1)
+      while (read(SerialFileStream, &Char, 1) == 1)
       {
         printf("%c\n",Char);
-        WaitFdWriteable(CommFd);
-        if (write(CommFd, &Char, 1) < 0){}
+        WaitFdWriteable(SerialFileStream);
+        if (write(SerialFileStream, &Char, 1) < 0){}
       }
   	 }
    }
