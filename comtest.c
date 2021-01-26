@@ -44,7 +44,7 @@ int main(int argc, char **argv)
   port_settings.c_cflag |= CS8;
   port_settings.c_cflag &= ~CRTSCTS;  //No hadware hanshaking
 
-  tcsetattr(fd, TCSANOW, &port_settings); // apply the settings to the port
+  tcsetattr(CommFd, TCSANOW, &port_settings); // apply the settings to the port
 
   for (;;)
   {
