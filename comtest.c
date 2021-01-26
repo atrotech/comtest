@@ -36,6 +36,26 @@ int main(int argc, char **argv)
 	options.c_lflag = 0;
 	tcflush(SerialFileStream, TCIFLUSH);
 	tcsetattr(SerialFileStream, TCSANOW, &options);
+
+  	//----- TX BYTES -----
+	unsigned char tx_buffer[20];
+	unsigned char *p_tx_buffer;
+	
+	p_tx_buffer = &tx_buffer[0];
+	*p_tx_buffer++ = 'H';
+	*p_tx_buffer++ = 'e';
+	*p_tx_buffer++ = 'l';
+	*p_tx_buffer++ = 'l';
+	*p_tx_buffer++ = 'o';
+	
+	if (SerialFileStream != -1)
+	{
+		int count = write(SerialFileStream, &tx_buffer[0], (p_tx_buffer - &tx_buffer[0]));		//Filestream, bytes to write, number of bytes to write
+		if (count < 0)
+		{
+			printf("UART TX error\n");
+		}
+	}
  
 
   for (;;)
