@@ -5,12 +5,6 @@
 # include <fcntl.h>
 
 # include <time.h>
-# include <errno.h>
-# include <string.h>
-#define max(x,y) (((x)>=(y))?(x):(y))
-
-
-
 
 
 
