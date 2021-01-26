@@ -3,7 +3,7 @@
 # include <termio.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <getopt.h>
+
 # include <time.h>
 # include <errno.h>
 # include <string.h>
@@ -46,6 +46,7 @@ int main(int argc, char **argv)
 
   tcsetattr(CommFd, TCSANOW, &port_settings); // apply the settings to the port
   printf("%d \n",cfgetospeed());
+
   for (;;)
   {
   	unsigned char Char = 0;
