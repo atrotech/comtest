@@ -22,20 +22,20 @@ int main(int argc, char **argv)
   int CommFd;
 
   const char *DeviceName = "/dev/ttyAMA3";
-  CommFd = open(DeviceName, O_RDWR, 0);
+  SerialFileStream = open(DeviceName, O_RDWR, 0);
 
   if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)printf("Unable set to NONBLOCK mode");
   //baudrate 9600, 8N1
   
 
   struct termios options;
-	tcgetattr(uart0_filestream, &options);
+	tcgetattr(SerialFileStream, &options);
 	options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;		//<Set baud rate
 	options.c_iflag = IGNPAR;
 	options.c_oflag = 0;
 	options.c_lflag = 0;
-	tcflush(uart0_filestream, TCIFLUSH);
-	tcsetattr(uart0_filestream, TCSANOW, &options);
+	tcflush(SerialFileStream, TCIFLUSH);
+	tcsetattr(SerialFileStream, TCSANOW, &options);
  
 
   for (;;)
