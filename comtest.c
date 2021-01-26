@@ -50,7 +50,7 @@ int main(int argc, char **argv)
     {
       while (read(SerialFileStream, &Char, 1) == 1)
       {
-        printf("%c\n",Char);
+        printf("%c\n",'x');
         WaitFdWriteable(SerialFileStream);
         if (write(SerialFileStream, &Char, 1) < 0){}
       }
