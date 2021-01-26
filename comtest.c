@@ -29,10 +29,22 @@ static inline void WaitFdWriteable(int Fd)
 int main(int argc, char **argv)
 {
   int CommFd;
-  int DeviceSpeed = B38400;
+  struct termios port_settings;
+
   const char *DeviceName = "/dev/ttyAMA3";
   CommFd = open(DeviceName, O_RDWR, 0);
   if (fcntl(CommFd, F_SETFL, O_NONBLOCK) < 0)printf("Unable set to NONBLOCK mode");
+  //baudrate 9600, 8N1
+  cfsetispeed(&port_settings, B115200);
+  cfsetospeed(&port_settings, B115200);
+
+  port_settings.c_cflag &= ~PARENB;   //Set no parity
+  port_settings.c_cflag &= ~CSTOPB;   //Set 1 stop bit
+  port_settings.c_cflag &= ~CSIZE;    //Set 8 bit data using mask bit
+  port_settings.c_cflag |= CS8;
+  port_settings.c_cflag &= ~CRTSCTS;  //No hadware hanshaking
+
+  tcsetattr(fd, TCSANOW, &port_settings); // apply the settings to the port
 
   for (;;)
   {
